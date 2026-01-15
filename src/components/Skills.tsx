@@ -12,77 +12,80 @@ import {
   ChevronRight
 } from 'lucide-react'
 import AnimatedSection from './AnimatedSection'
+import { useLanguage } from '@/context/LanguageContext'
 
-const techStack = {
+const getTechStack = (t: (key: string) => string) => ({
   frontend: {
-    title: 'Frontend',
+    titleKey: 'skills.cat.frontend',
     icon: Code2,
     color: 'from-blue-500 to-cyan-500',
     bgColor: 'bg-blue-500/10',
     borderColor: 'border-blue-500/20',
     technologies: [
-      { name: 'Angular 18/19', description: 'Aplicaciones empresariales con RxJS', projects: ['CompraXApp', 'ERP Villa del Cóndor'] },
-      { name: 'React / Next.js', description: 'Interfaces modernas con SSR', projects: ['Portafolio'] },
-      { name: 'TypeScript', description: 'Desarrollo tipado estático', projects: ['Todos mis proyectos'] },
-      { name: 'Bootstrap / Material', description: 'Diseño UI profesional', projects: ['Múltiples proyectos'] },
-      { name: 'HTML5 / CSS3 / SASS', description: 'Maquetación responsive', projects: ['Todos los proyectos'] },
+      { name: 'Angular 18/19', descKey: 'skills.tech.angular', projects: ['CompraXApp', 'ERP Villa del Cóndor'] },
+      { name: 'React / Next.js', descKey: 'skills.tech.react', projects: ['Portafolio'] },
+      { name: 'TypeScript', descKey: 'skills.tech.typescript', projectKeys: ['skills.tech.allProjects'] },
+      { name: 'Bootstrap / Material', descKey: 'skills.tech.bootstrap', projectKeys: ['skills.tech.multipleProjects'] },
+      { name: 'HTML5 / CSS3 / SASS', descKey: 'skills.tech.html', projectKeys: ['skills.tech.allProjects'] },
     ]
   },
   backend: {
-    title: 'Backend',
+    titleKey: 'skills.cat.backend',
     icon: Server,
     color: 'from-green-500 to-emerald-500',
     bgColor: 'bg-green-500/10',
     borderColor: 'border-green-500/20',
     technologies: [
-      { name: 'Java 17 / Spring Boot 3', description: 'Security, Data, Web - APIs REST robustas', projects: ['CompraXApp', 'ERP Villa del Cóndor'] },
-      { name: 'C# / .NET Core', description: 'Aplicaciones empresariales y APIs', projects: ['Pizzería Formaggio'] },
-      { name: 'Node.js / Express', description: 'Servicios backend ligeros y APIs', projects: ['Bot Discord', 'APIs varias'] },
-      { name: 'Microservicios', description: 'Arquitecturas distribuidas escalables', projects: ['ERP Villa del Cóndor'] },
-      { name: 'RabbitMQ', description: 'Mensajería Event-Driven', projects: ['ERP Villa del Cóndor'] },
+      { name: 'Java 17 / Spring Boot 3', descKey: 'skills.tech.java', projects: ['CompraXApp', 'ERP Villa del Cóndor'] },
+      { name: 'C# / .NET Core', descKey: 'skills.tech.dotnet', projects: ['Pizzería Formaggio'] },
+      { name: 'Node.js / Express', descKey: 'skills.tech.node', projects: ['Bot Discord', 'APIs'] },
+      { name: 'Microservices', descKey: 'skills.tech.microservices', projects: ['ERP Villa del Cóndor'] },
+      { name: 'RabbitMQ', descKey: 'skills.tech.rabbitmq', projects: ['ERP Villa del Cóndor'] },
     ]
   },
   database: {
-    title: 'Bases de Datos',
+    titleKey: 'skills.cat.database',
     icon: Database,
     color: 'from-purple-500 to-pink-500',
     bgColor: 'bg-purple-500/10',
     borderColor: 'border-purple-500/20',
     technologies: [
-      { name: 'SQL Server (T-SQL, SPs)', description: 'Bases de datos empresariales', projects: ['CompraXApp', 'Pizzería Formaggio'] },
-      { name: 'MySQL / PostgreSQL', description: 'Bases de datos relacionales', projects: ['Proyectos varios'] },
-      { name: 'MongoDB', description: 'Bases NoSQL flexibles', projects: ['Bot Discord'] },
-      { name: 'Hibernate / JPA', description: 'ORM para Java', projects: ['CompraXApp', 'ERP'] },
-      { name: 'Entity Framework', description: 'ORM para .NET', projects: ['Pizzería Formaggio'] },
+      { name: 'SQL Server (T-SQL, SPs)', descKey: 'skills.tech.sqlserver', projects: ['CompraXApp', 'Pizzería Formaggio'] },
+      { name: 'MySQL / PostgreSQL', descKey: 'skills.tech.mysql', projectKeys: ['skills.tech.variousProjects'] },
+      { name: 'MongoDB', descKey: 'skills.tech.mongodb', projects: ['Bot Discord'] },
+      { name: 'Hibernate / JPA', descKey: 'skills.tech.hibernate', projects: ['CompraXApp', 'ERP'] },
+      { name: 'Entity Framework', descKey: 'skills.tech.ef', projects: ['Pizzería Formaggio'] },
     ]
   },
   tools: {
-    title: 'DevOps & Herramientas',
+    titleKey: 'skills.cat.tools',
     icon: Wrench,
     color: 'from-orange-500 to-red-500',
     bgColor: 'bg-orange-500/10',
     borderColor: 'border-orange-500/20',
     technologies: [
-      { name: 'Docker (Compose)', description: 'Containerización de aplicaciones', projects: ['CompraXApp', 'ERP'] },
-      { name: 'GitHub Actions (CI/CD)', description: 'Integración y despliegue continuo', projects: ['Proyectos recientes'] },
-      { name: 'Nginx / Linux (Bash)', description: 'Servidor web y administración', projects: ['Despliegues'] },
-      { name: 'GitFlow', description: 'Flujo de trabajo colaborativo', projects: ['Todos los proyectos'] },
-      { name: 'Testing (JUnit, Mockito, Jasmine)', description: 'Tests unitarios e integración', projects: ['CompraXApp'] },
+      { name: 'Docker (Compose)', descKey: 'skills.tech.docker', projects: ['CompraXApp', 'ERP'] },
+      { name: 'GitHub Actions (CI/CD)', descKey: 'skills.tech.github', projectKeys: ['skills.tech.recentProjects'] },
+      { name: 'Nginx / Linux (Bash)', descKey: 'skills.tech.nginx', projectKeys: ['skills.tech.deployments'] },
+      { name: 'GitFlow', descKey: 'skills.tech.gitflow', projectKeys: ['skills.tech.allProjects'] },
+      { name: 'Testing (JUnit, Mockito, Jasmine)', descKey: 'skills.tech.testing', projects: ['CompraXApp'] },
     ]
   }
-}
+})
 
-const softSkills = [
-  { skill: 'Trabajo en equipo', icon: '👥' },
-  { skill: 'Comunicación', icon: '💬' },
-  { skill: 'Resolución de problemas', icon: '🧩' },
-  { skill: 'Adaptabilidad', icon: '🔄' },
-  { skill: 'Aprendizaje rápido', icon: '📚' },
-  { skill: 'Liderazgo', icon: '🎯' },
+const softSkillsKeys = [
+  { key: 'skills.teamwork', icon: '👥' },
+  { key: 'skills.communication', icon: '💬' },
+  { key: 'skills.problemSolving', icon: '🧩' },
+  { key: 'skills.adaptability', icon: '🔄' },
+  { key: 'skills.fastLearning', icon: '📚' },
+  { key: 'skills.leadership', icon: '🎯' },
 ]
 
 export default function Skills() {
-  const [activeCategory, setActiveCategory] = useState<keyof typeof techStack>('frontend')
+  const { t } = useLanguage()
+  const techStack = getTechStack(t)
+  const [activeCategory, setActiveCategory] = useState<keyof ReturnType<typeof getTechStack>>('frontend')
   const activeStack = techStack[activeCategory]
 
   return (
@@ -105,13 +108,13 @@ export default function Skills() {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-400 text-sm font-medium mb-4"
             >
               <Layers size={16} />
-              <span>Tech Stack</span>
+              <span>{t('skills.badge')}</span>
             </motion.div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-              Tecnologías que <span className="bg-gradient-to-r from-primary-400 to-purple-400 bg-clip-text text-transparent">Domino</span>
+              {t('skills.title')} <span className="bg-gradient-to-r from-primary-400 to-purple-400 bg-clip-text text-transparent">{t('skills.titleHighlight')}</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-              Mi stack tecnológico, construido a través de proyectos reales y experiencia práctica
+              {t('skills.subtitle')}
             </p>
           </div>
         </AnimatedSection>
@@ -125,7 +128,7 @@ export default function Skills() {
               return (
                 <motion.button
                   key={key}
-                  onClick={() => setActiveCategory(key as keyof typeof techStack)}
+                  onClick={() => setActiveCategory(key as keyof ReturnType<typeof getTechStack>)}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className={`flex items-center gap-2 px-5 py-3 rounded-xl font-medium transition-all duration-300 ${
@@ -135,7 +138,7 @@ export default function Skills() {
                   }`}
                 >
                   <Icon size={18} />
-                  <span>{category.title}</span>
+                  <span>{t(category.titleKey)}</span>
                 </motion.button>
               )
             })}
@@ -171,15 +174,15 @@ export default function Skills() {
                       <ChevronRight className="text-gray-600 group-hover:text-primary-400 group-hover:translate-x-1 transition-all" size={18} />
                     </div>
                     <p className="text-gray-400 text-sm mb-3">
-                      {tech.description}
+                      {t(tech.descKey)}
                     </p>
                     <div className="flex flex-wrap gap-2">
-                      {tech.projects.map((project) => (
+                      {('projectKeys' in tech && tech.projectKeys ? tech.projectKeys : 'projects' in tech && tech.projects ? tech.projects : []).map((project: string) => (
                         <span
                           key={project}
                           className="text-xs px-2 py-1 rounded-full bg-gray-800/80 text-gray-300 border border-gray-700/50"
                         >
-                          {project}
+                          {project.startsWith('skills.') ? t(project) : project}
                         </span>
                       ))}
                     </div>
@@ -201,17 +204,17 @@ export default function Skills() {
                 className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-sm font-medium mb-4"
               >
                 <Sparkles size={16} />
-                <span>Soft Skills</span>
+                <span>{t('skills.softSkills')}</span>
               </motion.div>
               <h3 className="text-2xl md:text-3xl font-bold text-white">
-                Más allá del código
+                {t('skills.beyondCode') || (t('skills.softSkills'))}
               </h3>
             </div>
 
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-              {softSkills.map((item, index) => (
+              {softSkillsKeys.map((item, index) => (
                 <motion.div
-                  key={item.skill}
+                  key={item.key}
                   initial={{ opacity: 0, scale: 0.8 }}
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
@@ -220,7 +223,7 @@ export default function Skills() {
                   className="flex flex-col items-center p-4 rounded-2xl bg-gray-800/30 border border-gray-700/30 hover:border-purple-500/30 transition-all duration-300"
                 >
                   <span className="text-3xl mb-2">{item.icon}</span>
-                  <span className="text-sm text-gray-300 text-center font-medium">{item.skill}</span>
+                  <span className="text-sm text-gray-300 text-center font-medium">{t(item.key)}</span>
                 </motion.div>
               ))}
             </div>

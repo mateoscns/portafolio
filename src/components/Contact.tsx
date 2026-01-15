@@ -4,8 +4,10 @@ import { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Mail, MapPin, Phone, Github, Linkedin, CheckCircle, MessageCircle } from 'lucide-react'
 import AnimatedSection from './AnimatedSection'
+import { useLanguage } from '@/context/LanguageContext'
 
 export default function Contact() {
+  const { t, language } = useLanguage()
   const formRef = useRef<HTMLFormElement>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
@@ -21,11 +23,12 @@ export default function Contact() {
       const subject = (form.elements.namedItem('subject') as HTMLInputElement)?.value || ''
       const message = (form.elements.namedItem('message') as HTMLTextAreaElement)?.value || ''
       
+      const greeting = language === 'en' ? 'Hi Leandro, how are you?' : 'Hola Leandro, ¿cómo estás?'
+      const intro = language === 'en' ? `I'm ${name}, I'm writing from your portfolio.` : `Soy ${name}, te escribo desde tu portfolio.`
+      const contact = language === 'en' ? 'My contact' : 'Mi contacto'
+      
       const whatsappMessage = encodeURIComponent(
-        `Hola Leandro, \u00bfc\u00f3mo est\u00e1s?\n\n` +
-        `Soy ${name}, te escribo desde tu portfolio.\n\n` +
-        `${subject}: ${message}\n\n` +
-        `Mi contacto: ${email}`
+        `${greeting}\n\n${intro}\n\n${subject}: ${message}\n\n${contact}: ${email}`
       )
       const whatsappUrl = `https://wa.me/5493513091448?text=${whatsappMessage}`
       
@@ -38,19 +41,19 @@ export default function Contact() {
   const contactInfo = [
     {
       icon: Mail,
-      label: 'Email',
+      labelKey: 'contact.email',
       value: 'mateoscns@gmail.com',
       href: 'mailto:mateoscns@gmail.com',
     },
     {
       icon: Phone,
-      label: 'Teléfono',
+      labelKey: 'contact.phone',
       value: '+54 9 351 309-1448',
       href: 'tel:+5493513091448',
     },
     {
       icon: MapPin,
-      label: 'Ubicación',
+      labelKey: 'contact.location',
       value: 'Córdoba, Argentina',
       href: '#',
     },
@@ -90,13 +93,13 @@ export default function Contact() {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-400 text-sm font-medium mb-4"
             >
               <Mail size={16} />
-              <span>Contacto</span>
+              <span>{t('contact.badge')}</span>
             </motion.div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-              ¿Listo para <span className="bg-gradient-to-r from-primary-400 to-purple-400 bg-clip-text text-transparent">trabajar juntos</span>?
+              {t('contact.title')} <span className="bg-gradient-to-r from-primary-400 to-purple-400 bg-clip-text text-transparent">{t('contact.titleHighlight')}</span>?
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-              ¿Tienes un proyecto en mente o una oportunidad laboral? ¡Hablemos!
+              {t('contact.subtitle')}
             </p>
           </div>
         </AnimatedSection>
@@ -107,13 +110,13 @@ export default function Contact() {
             <AnimatedSection delay={0.2}>
               <div className="p-6 rounded-2xl bg-gray-900/50 border border-gray-800/50 backdrop-blur-sm">
                 <h3 className="text-xl font-bold text-white mb-6">
-                  Información de contacto
+                  {t('contact.info')}
                 </h3>
                 
                 <div className="space-y-4">
                   {contactInfo.map((item) => (
                     <a
-                      key={item.label}
+                      key={item.labelKey}
                       href={item.href}
                       className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-800/50 transition-colors group"
                     >
@@ -122,7 +125,7 @@ export default function Contact() {
                       </div>
                       <div>
                         <p className="text-sm text-gray-500">
-                          {item.label}
+                          {t(item.labelKey)}
                         </p>
                         <p className="font-medium text-white">
                           {item.value}
@@ -137,7 +140,7 @@ export default function Contact() {
                 {/* Social Links */}
                 <div>
                   <p className="text-sm text-gray-500 mb-4">
-                    Sígueme en redes
+                    {t('contact.social')}
                   </p>
                   <div className="flex gap-3">
                     {socialLinks.map((social) => (
@@ -163,8 +166,7 @@ export default function Contact() {
             <AnimatedSection delay={0.3}>
               <div className="p-4 rounded-xl bg-gradient-to-r from-primary-500/10 to-purple-500/10 border border-primary-500/20">
                 <p className="text-sm text-gray-300">
-                  🚀 <span className="font-medium text-white">Respuesta rápida:</span> Generalmente 
-                  respondo dentro de las 24 horas. ¡Espero tu mensaje!
+                  🚀 <span className="font-medium text-white">{language === 'en' ? 'Quick response:' : 'Respuesta rápida:'}</span> {language === 'en' ? 'I usually respond within 24 hours. Looking forward to your message!' : 'Generalmente respondo dentro de las 24 horas. ¡Espero tu mensaje!'}
                 </p>
               </div>
             </AnimatedSection>
@@ -174,14 +176,14 @@ export default function Contact() {
           <AnimatedSection delay={0.3} className="lg:col-span-3">
             <div className="p-6 rounded-2xl bg-gray-900/50 border border-gray-800/50 backdrop-blur-sm">
               <h3 className="text-xl font-bold text-white mb-6">
-                Envíame un mensaje
+                {language === 'en' ? 'Send me a message' : 'Envíame un mensaje'}
               </h3>
 
               <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-300 mb-2">
-                      Nombre *
+                      {t('contact.form.name')} *
                     </label>
                     <input
                       type="text"
@@ -189,12 +191,12 @@ export default function Contact() {
                       name="user_name"
                       required
                       className="w-full px-4 py-3 rounded-xl bg-gray-800/50 border border-gray-700/50 text-white placeholder-gray-500 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-all outline-none"
-                      placeholder="Tu nombre"
+                      placeholder={language === 'en' ? 'Your name' : 'Tu nombre'}
                     />
                   </div>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-2">
-                      Email *
+                      {t('contact.form.email')} *
                     </label>
                     <input
                       type="email"
@@ -202,14 +204,14 @@ export default function Contact() {
                       name="user_email"
                       required
                       className="w-full px-4 py-3 rounded-xl bg-gray-800/50 border border-gray-700/50 text-white placeholder-gray-500 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-all outline-none"
-                      placeholder="tu@email.com"
+                      placeholder={language === 'en' ? 'your@email.com' : 'tu@email.com'}
                     />
                   </div>
                 </div>
 
                 <div>
                   <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-2">
-                    Asunto *
+                    {t('contact.form.subject')} *
                   </label>
                   <input
                     type="text"
@@ -217,13 +219,13 @@ export default function Contact() {
                     name="subject"
                     required
                     className="w-full px-4 py-3 rounded-xl bg-gray-800/50 border border-gray-700/50 text-white placeholder-gray-500 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-all outline-none"
-                    placeholder="¿En qué puedo ayudarte?"
+                    placeholder={language === 'en' ? 'How can I help you?' : '¿En qué puedo ayudarte?'}
                   />
                 </div>
 
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-2">
-                    Mensaje *
+                    {t('contact.form.message')} *
                   </label>
                   <textarea
                     id="message"
@@ -231,7 +233,7 @@ export default function Contact() {
                     rows={5}
                     required
                     className="w-full px-4 py-3 rounded-xl bg-gray-800/50 border border-gray-700/50 text-white placeholder-gray-500 focus:border-primary-500 focus:ring-1 focus:ring-primary-500 transition-all outline-none resize-none"
-                    placeholder="Cuéntame sobre tu proyecto u oportunidad..."
+                    placeholder={language === 'en' ? 'Tell me about your project or opportunity...' : 'Cuéntame sobre tu proyecto u oportunidad...'}
                   />
                 </div>
 
@@ -243,7 +245,7 @@ export default function Contact() {
                     className="flex items-center gap-2 p-4 rounded-xl bg-green-500/10 border border-green-500/20 text-green-400"
                   >
                     <CheckCircle size={20} />
-                    <span>¡Abriendo WhatsApp! Te responderé pronto.</span>
+                    <span>{language === 'en' ? 'Opening WhatsApp! I\'ll respond soon.' : '¡Abriendo WhatsApp! Te responderé pronto.'}</span>
                   </motion.div>
                 )}
 
@@ -254,7 +256,7 @@ export default function Contact() {
                   className="w-full px-6 py-4 bg-gradient-to-r from-green-500 to-green-600 text-white font-semibold rounded-xl shadow-lg shadow-green-500/25 hover:shadow-green-500/40 transition-all flex items-center justify-center gap-2"
                 >
                   <MessageCircle size={20} />
-                  <span>Enviar por WhatsApp</span>
+                  <span>{t('contact.form.send')}</span>
                 </motion.button>
               </form>
             </div>

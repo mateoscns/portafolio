@@ -3,8 +3,11 @@
 import { motion } from 'framer-motion'
 import { Play, GraduationCap, Award, ExternalLink, Sparkles } from 'lucide-react'
 import AnimatedSection from './AnimatedSection'
+import { useLanguage } from '@/context/LanguageContext'
 
 export default function Thesis() {
+  const { t } = useLanguage()
+  
   return (
     <section id="thesis" className="py-20 lg:py-32 relative overflow-hidden">
       {/* Background */}
@@ -33,16 +36,16 @@ export default function Thesis() {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-yellow-500/10 border border-yellow-500/20 text-yellow-400 text-sm font-medium mb-4"
             >
               <Sparkles size={16} />
-              <span>Proyecto Destacado</span>
+              <span>{t('thesis.badge')}</span>
             </motion.div>
             <div className="flex items-center justify-center gap-3 mb-4">
               <GraduationCap className="text-primary-400" size={32} />
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
-                Mi <span className="bg-gradient-to-r from-primary-400 to-purple-400 bg-clip-text text-transparent">Tesis</span>
+                {t('thesis.title')} <span className="bg-gradient-to-r from-primary-400 to-purple-400 bg-clip-text text-transparent">{t('thesis.titleHighlight')}</span>
               </h2>
             </div>
             <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-              Proyecto final de carrera - Tecnicatura Superior en Programación UTN Córdoba
+              {t('thesis.subtitle')}
             </p>
           </div>
         </AnimatedSection>
@@ -67,7 +70,7 @@ export default function Thesis() {
                   <iframe 
                     className="absolute inset-0 w-full h-full z-20"
                     src="https://www.youtube.com/embed/8YJeum5KXjE" 
-                    title="Video de presentación de tesis - CompraXApp"
+                    title={t('thesis.videoTitle')}
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                     allowFullScreen
                   />
@@ -88,15 +91,13 @@ export default function Thesis() {
                     </div>
                     <div>
                       <h3 className="text-xl font-bold text-white mb-2">
-                        🛒 CompraXApp - Plataforma E-Commerce
+                        🛒 {t('thesis.project')}
                       </h3>
                       <p className="text-gray-300 mb-4">
-                        Sistema integral de comercio electrónico con integración de pagos
+                        {t('thesis.projectDesc')}
                       </p>
                       <p className="text-gray-500 text-sm leading-relaxed">
-                        Plataforma full-stack que permite a usuarios explorar productos, gestionar carritos, 
-                        realizar pedidos y procesar pagos con MercadoPago. Incluye panel de administración 
-                        completo, sistema de notificaciones en tiempo real y módulo de promociones.
+                        {t('thesis.projectFull')}
                       </p>
                     </div>
                   </div>
@@ -106,7 +107,7 @@ export default function Thesis() {
               <AnimatedSection delay={0.4}>
                 <div className="h-full p-6 rounded-2xl bg-gray-900/50 border border-gray-800/50 hover:border-primary-500/30 transition-all">
                   <h4 className="font-semibold text-white mb-4">
-                    Tecnologías utilizadas
+                    {t('thesis.tech')}
                   </h4>
                   <div className="flex flex-wrap gap-2 mb-6">
                     {['Angular 19', 'Spring Boot 3.3', 'SQL Server', 'MercadoPago SDK', 'JWT', 'Java 17', 'WhatsApp Business API', 'Docker'].map((tech) => (
@@ -126,7 +127,7 @@ export default function Thesis() {
                       className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-800/50 border border-gray-700/50 text-gray-300 hover:text-primary-400 hover:border-primary-500/30 transition-all"
                     >
                       <ExternalLink size={16} />
-                      <span className="text-sm font-medium">Ver Repositorio</span>
+                      <span className="text-sm font-medium">{t('thesis.viewRepo')}</span>
                     </motion.a>
                   </div>
                 </div>

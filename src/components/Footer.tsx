@@ -2,8 +2,11 @@
 
 import { motion } from 'framer-motion'
 import { Heart, Github, Linkedin, Mail, ArrowUp, Code2 } from 'lucide-react'
+import { useLanguage } from '@/context/LanguageContext'
 
 export default function Footer() {
+  const { t, language } = useLanguage()
+  
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
@@ -11,10 +14,10 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   const quickLinks = [
-    { name: 'Inicio', href: '#hero' },
-    { name: 'Sobre mí', href: '#about' },
-    { name: 'Proyectos', href: '#projects' },
-    { name: 'Contacto', href: '#contact' },
+    { nameKey: 'footer.home', href: '#hero' },
+    { nameKey: 'footer.about', href: '#about' },
+    { nameKey: 'footer.projects', href: '#projects' },
+    { nameKey: 'footer.contact', href: '#contact' },
   ]
 
   const socialLinks = [
@@ -41,25 +44,24 @@ export default function Footer() {
               </span>
             </a>
             <p className="mt-4 text-gray-400 text-sm leading-relaxed">
-              Técnico Superior en Programación graduado de la UTN Córdoba. 
-              Especialista Full Stack con alta adaptabilidad y pasión por crear soluciones digitales.
+              {t('footer.desc')}
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
             <h4 className="font-semibold text-white mb-4">
-              Links rápidos
+              {t('footer.quickLinks')}
             </h4>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
-                <li key={link.name}>
+                <li key={link.nameKey}>
                   <a
                     href={link.href}
                     className="text-gray-400 hover:text-primary-400 transition-colors text-sm inline-flex items-center gap-2 group"
                   >
                     <span className="w-1 h-1 rounded-full bg-gray-600 group-hover:bg-primary-400 transition-colors" />
-                    {link.name}
+                    {t(link.nameKey)}
                   </a>
                 </li>
               ))}
@@ -69,7 +71,7 @@ export default function Footer() {
           {/* Social */}
           <div>
             <h4 className="font-semibold text-white mb-4">
-              Conectemos
+              {t('footer.connect')}
             </h4>
             <div className="flex gap-3">
               {socialLinks.map((social) => (
@@ -96,9 +98,9 @@ export default function Footer() {
         {/* Bottom */}
         <div className="mt-12 pt-8 border-t border-gray-800 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-gray-500 flex items-center gap-1">
-            © {currentYear} Leandro Scienza. Hecho con
+            © {currentYear} Leandro Scienza. {t('footer.builtWith')}
             <Heart size={14} className="text-red-500" fill="currentColor" />
-            en Argentina
+            {language === 'en' ? 'in Argentina' : 'en Argentina'}
           </p>
 
           {/* Back to top */}
@@ -108,7 +110,7 @@ export default function Footer() {
             whileTap={{ scale: 0.95 }}
             className="flex items-center gap-2 px-4 py-2 rounded-full bg-gray-900 border border-gray-800 text-sm text-gray-400 hover:text-primary-400 hover:border-primary-500/30 transition-all"
           >
-            <span>Volver arriba</span>
+            <span>{language === 'en' ? 'Back to top' : 'Volver arriba'}</span>
             <ArrowUp size={16} />
           </motion.button>
         </div>
