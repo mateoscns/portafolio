@@ -1,0 +1,10 @@
+// Coloca aquí las imágenes de tus proyectos
+// Formato recomendado: .jpg o .png
+// Tamaño recomendado: 800x600px o similar (aspect ratio 4:3 o 16:9)
+//
+// Ejemplos:
+// - ecommerce.jpg
+// - taskapp.jpg
+// - dashboard.jpg
+//
+// Luego actualiza las rutas en src/components/Projects.tsx

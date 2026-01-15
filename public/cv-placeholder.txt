@@ -1,0 +1,8 @@
+// Este archivo es un placeholder para tu CV
+// Reemplaza este archivo con tu CV real en formato PDF
+// El nombre debe ser: cv.pdf
+
+// Para que funcione correctamente:
+// 1. Elimina este archivo
+// 2. Coloca tu CV con el nombre "cv.pdf" en esta carpeta (public/)
+// 3. El botón de descarga del navbar funcionará automáticamente
