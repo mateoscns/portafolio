@@ -3,88 +3,91 @@
 import { motion } from 'framer-motion'
 import { Briefcase, Calendar, MapPin, ExternalLink } from 'lucide-react'
 import AnimatedSection from './AnimatedSection'
-
-const experiences = [
-  {
-    id: 1,
-    position: 'Desarrollador Full Stack - Proyecto de Tesis',
-    company: 'CompraXApp - Plataforma E-commerce',
-    companyUrl: 'https://github.com/113927-Mateo-Nielsen-Scienza/CompraXapp',
-    location: 'UTN Córdoba',
-    period: '2025',
-    type: 'Tesis',
-    description: 'Full Stack Moderno: SPA en Angular 19 con SSR y Material. Backend API RESTful Java 17 Spring Boot 3.3, arquitectura en capas con JPA/Hibernate (SQL Server) y Lombok.',
-    responsibilities: [
-      'Autenticación Stateless con JWT/Spring Security',
-      'Documentación Swagger y Testing (JUnit 5, Jasmine)',
-      'Despliegue containerizado con Docker',
-      'Integración pasarela Mercado Pago',
-      'WhatsApp Business API para notificaciones',
-      'Notificaciones SMTP y reportes PDF (jsPDF)',
-    ],
-    technologies: ['Angular 19', 'Spring Boot 3.3', 'Java 17', 'SQL Server', 'JWT', 'Docker', 'MercadoPago'],
-  },
-  {
-    id: 2,
-    position: 'Desarrollador Backend - Servicio de Mensajería',
-    company: 'ERP Villa del Cóndor - Barrio Privado',
-    companyUrl: '',
-    location: 'UTN Córdoba',
-    period: '2024 (6 meses)',
-    type: 'Desarrollo Enterprise',
-    description: 'Entorno corporativo con desarrollo colaborativo en equipo de 30 desarrolladores, organizados en células ágiles y coordinados mediante GitFlow estricto (Code Reviews, Pull Requests).',
-    responsibilities: [
-      'Arquitectura de Microservicios: Sistema distribuido de 15+ servicios (Java Spring Boot)',
-      'Comunicación asíncrona mediante RabbitMQ (Event-Driven) para alta disponibilidad',
-      'Implementación de API Gateway con Nginx y balanceo de carga con ProxySQL',
-      'Orquestación de contenedores con Docker Compose y CI/CD con GitHub Actions',
-      'Frontend en Angular 18 (RxJS, Lazy Loading)',
-      'Monitoreo en tiempo real con stack Prometheus + Grafana',
-      'Desarrollo del Servicio de Mensajería y Notificaciones con RabbitMQ',
-      'Definición de contratos JSON y distribución multicanal (Email, Telegram, SMS, Web)',
-    ],
-    technologies: ['Java Spring Boot', 'RabbitMQ', 'Angular 18', 'Docker', 'Nginx', 'Prometheus', 'Grafana', 'GitHub Actions'],
-  },
-  {
-    id: 3,
-    position: 'Desarrollador Full Stack',
-    company: 'Pizzería Formaggio - Sistema de Gestión',
-    companyUrl: '',
-    location: 'Córdoba, Argentina',
-    period: '08/2022 – 12/2022',
-    type: 'Software a Medida',
-    description: 'Desarrollo integral: Creación de sistema de gestión de ventas, stock y facturación utilizando C# .NET y Windows Forms.',
-    responsibilities: [
-      'Diseño y normalización de base de datos en SQL Server',
-      'Optimización de rendimiento mediante Joins complejos',
-      'Control de integridad referencial',
-      'Módulos de reporte de caja',
-      'Gestión de usuarios por roles',
-      'Sistema de alertas de stock crítico',
-    ],
-    technologies: ['C#', '.NET', 'Windows Forms', 'SQL Server', 'T-SQL'],
-  },
-  {
-    id: 4,
-    position: 'Atención al Cliente y Gestión de Stock',
-    company: 'Bazar De Todo Un Poco',
-    companyUrl: '',
-    location: 'Córdoba, Argentina',
-    period: '07/2019 - 08/2021',
-    type: 'Part-time',
-    description: 'Atención personalizada a clientes, manejo de caja y control de stock. Desarrollo de habilidades de organización, trabajo en equipo y atención al detalle.',
-    responsibilities: [
-      'Atención personalizada a clientes',
-      'Manejo de caja y control de stock',
-      'Registro de faltantes y organización de productos',
-      'Cálculo y actualización de precios',
-      'Trabajo en equipo para mantener entorno de venta eficiente',
-    ],
-    technologies: ['Gestión de Inventario', 'Atención al Cliente', 'Trabajo en Equipo'],
-  },
-]
+import { useLanguage } from '@/context/LanguageContext'
 
 export default function Experience() {
+  const { t } = useLanguage()
+
+  const experiences = [
+    {
+      id: 1,
+      positionKey: 'exp.1.position',
+      companyKey: 'exp.1.company',
+      companyUrl: 'https://github.com/113927-Mateo-Nielsen-Scienza/CompraXapp',
+      location: 'UTN Córdoba',
+      periodKey: 'exp.1.period',
+      typeKey: 'exp.1.type',
+      descKey: 'exp.1.desc',
+      responsibilities: [
+        'exp.1.resp1',
+        'exp.1.resp2',
+        'exp.1.resp3',
+        'exp.1.resp4',
+        'exp.1.resp5',
+        'exp.1.resp6',
+      ],
+      technologies: ['Angular 19', 'Spring Boot 3.3', 'Java 17', 'SQL Server', 'JWT', 'Docker', 'MercadoPago'],
+    },
+    {
+      id: 2,
+      positionKey: 'exp.2.position',
+      companyKey: 'exp.2.company',
+      companyUrl: '',
+      location: 'UTN Córdoba',
+      periodKey: 'exp.2.period',
+      typeKey: 'exp.2.type',
+      descKey: 'exp.2.desc',
+      responsibilities: [
+        'exp.2.resp1',
+        'exp.2.resp2',
+        'exp.2.resp3',
+        'exp.2.resp4',
+        'exp.2.resp5',
+        'exp.2.resp6',
+        'exp.2.resp7',
+        'exp.2.resp8',
+      ],
+      technologies: ['Java Spring Boot', 'RabbitMQ', 'Angular 18', 'Docker', 'Nginx', 'Prometheus', 'Grafana', 'GitHub Actions'],
+    },
+    {
+      id: 3,
+      positionKey: 'exp.3.position',
+      companyKey: 'exp.3.company',
+      companyUrl: '',
+      location: 'Córdoba, Argentina',
+      periodKey: 'exp.3.period',
+      typeKey: 'exp.3.type',
+      descKey: 'exp.3.desc',
+      responsibilities: [
+        'exp.3.resp1',
+        'exp.3.resp2',
+        'exp.3.resp3',
+        'exp.3.resp4',
+        'exp.3.resp5',
+        'exp.3.resp6',
+      ],
+      technologies: ['C#', '.NET', 'Windows Forms', 'SQL Server', 'T-SQL'],
+    },
+    {
+      id: 4,
+      positionKey: 'exp.4.position',
+      companyKey: 'exp.4.company',
+      companyUrl: '',
+      location: 'Córdoba, Argentina',
+      periodKey: 'exp.4.period',
+      typeKey: 'exp.4.type',
+      descKey: 'exp.4.desc',
+      responsibilities: [
+        'exp.4.resp1',
+        'exp.4.resp2',
+        'exp.4.resp3',
+        'exp.4.resp4',
+        'exp.4.resp5',
+      ],
+      technologies: [],
+    },
+  ]
+
   return (
     <section id="experience" className="py-20 lg:py-32 relative overflow-hidden">
       {/* Background */}
@@ -104,13 +107,13 @@ export default function Experience() {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-400 text-sm font-medium mb-4"
             >
               <Briefcase size={16} />
-              <span>Experiencia</span>
+              <span>{t('experience.badge')}</span>
             </motion.div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-              Experiencia <span className="bg-gradient-to-r from-primary-400 to-purple-400 bg-clip-text text-transparent">Laboral</span>
+              {t('experience.title')} <span className="bg-gradient-to-r from-primary-400 to-purple-400 bg-clip-text text-transparent">{t('experience.titleHighlight')}</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-              Mi trayectoria profesional en el desarrollo de software
+              {t('experience.subtitle')}
             </p>
           </div>
         </AnimatedSection>
@@ -131,7 +134,7 @@ export default function Experience() {
                 <div className="md:hidden ml-6 mb-2">
                   <span className="inline-flex items-center gap-1 text-sm text-primary-400 font-medium">
                     <Calendar size={14} />
-                    {exp.period}
+                    {t(exp.periodKey)}
                   </span>
                 </div>
 
@@ -145,7 +148,7 @@ export default function Experience() {
                   <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
                     <div>
                       <h3 className="text-xl font-bold text-white">
-                        {exp.position}
+                        {t(exp.positionKey)}
                       </h3>
                       <div className="flex items-center gap-2 mt-1">
                         {exp.companyUrl ? (
@@ -155,23 +158,23 @@ export default function Experience() {
                             rel="noopener noreferrer"
                             className="text-primary-400 font-semibold hover:underline flex items-center gap-1"
                           >
-                            {exp.company}
+                            {t(exp.companyKey)}
                             <ExternalLink size={14} />
                           </a>
                         ) : (
-                          <span className="text-primary-400 font-semibold">{exp.company}</span>
+                          <span className="text-primary-400 font-semibold">{t(exp.companyKey)}</span>
                         )}
                       </div>
                     </div>
                     <span className="px-3 py-1 rounded-full text-xs font-medium bg-primary-500/10 border border-primary-500/20 text-primary-400">
-                      {exp.type}
+                      {t(exp.typeKey)}
                     </span>
                   </div>
 
                   <div className="flex flex-wrap items-center gap-4 text-sm text-gray-500 mb-4">
                     <span className="hidden md:flex items-center gap-1">
                       <Calendar size={14} />
-                      {exp.period}
+                      {t(exp.periodKey)}
                     </span>
                     <span className="flex items-center gap-1">
                       <MapPin size={14} />
@@ -180,33 +183,35 @@ export default function Experience() {
                   </div>
 
                   <p className="text-gray-400 mb-4">
-                    {exp.description}
+                    {t(exp.descKey)}
                   </p>
 
                   <div className="mb-4">
                     <p className="text-sm font-semibold text-gray-300 mb-2">
-                      Responsabilidades:
+                      {t('experience.responsibilities')}
                     </p>
                     <ul className="space-y-1">
-                      {exp.responsibilities.map((resp, i) => (
+                      {exp.responsibilities.map((respKey, i) => (
                         <li key={i} className="flex items-start gap-2 text-sm text-gray-400">
                           <span className="text-primary-400 mt-1">•</span>
-                          {resp}
+                          {t(respKey)}
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  <div className="flex flex-wrap gap-2">
-                    {exp.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-2 py-1 text-xs rounded-md bg-gray-800/80 border border-gray-700/50 text-gray-400"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+                  {exp.technologies.length > 0 && (
+                    <div className="flex flex-wrap gap-2">
+                      {exp.technologies.map((tech) => (
+                        <span
+                          key={tech}
+                          className="px-2 py-1 text-xs rounded-md bg-gray-800/80 border border-gray-700/50 text-gray-400"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </motion.div>
 
                 {/* Spacer for alternating layout */}
@@ -225,12 +230,11 @@ export default function Experience() {
                   <Briefcase className="text-green-400" size={24} />
                 </div>
                 <h3 className="text-xl font-bold text-white">
-                  Abierto a nuevas oportunidades
+                  {t('experience.openTo')}
                 </h3>
               </div>
               <p className="text-gray-400 mb-6">
-                Estoy buscando activamente nuevas oportunidades laborales donde pueda 
-                aportar mis conocimientos y seguir creciendo profesionalmente.
+                {t('experience.openToText')}
               </p>
               <motion.a
                 href="#contact"
@@ -238,7 +242,7 @@ export default function Experience() {
                 whileTap={{ scale: 0.95 }}
                 className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-primary-500 to-purple-500 text-white font-semibold rounded-xl shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40 transition-all"
               >
-                <span>Contáctame</span>
+                <span>{t('experience.contactMe')}</span>
               </motion.a>
             </div>
           </div>

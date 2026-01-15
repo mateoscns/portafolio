@@ -3,13 +3,14 @@
 import { motion } from 'framer-motion'
 import { Github, Star, Code } from 'lucide-react'
 import AnimatedSection from './AnimatedSection'
+import { useLanguage } from '@/context/LanguageContext'
 
 const projects = [
   {
     id: 1,
-    title: 'CompraXApp - E-Commerce',
+    titleKey: 'project.1.title',
     emoji: '🛒',
-    description: 'Plataforma moderna con SSR (Server Side Rendering). Implementación de seguridad con JWT, pasarela de Mercado Pago, WhatsApp Business API y despliegue en Docker. Proyecto de Tesis 2025.',
+    descKey: 'project.1.desc',
     tags: ['Angular 19', 'Java 17', 'Spring Boot 3.3', 'SQL Server', 'JWT', 'Docker'],
     github: 'https://github.com/113927-Mateo-Nielsen-Scienza/CompraXapp',
     demo: '',
@@ -17,9 +18,9 @@ const projects = [
   },
   {
     id: 2,
-    title: 'ERP Villa del Cóndor',
+    titleKey: 'project.2.title',
     emoji: '🏘️',
-    description: 'Sistema distribuido de alta disponibilidad desarrollado en equipo de 30 personas. Arquitectura de 15+ microservicios con RabbitMQ. Mi rol: servicio de mensajería asíncrona multicanal (Telegram, SMS, Email).',
+    descKey: 'project.2.desc',
     tags: ['Angular 18', 'Microservicios', 'RabbitMQ', 'Prometheus', 'Grafana'],
     github: 'https://github.com/TUP-FRC-UTN/tpi-dabd-integration-app-2w1',
     demo: '',
@@ -27,9 +28,9 @@ const projects = [
   },
   {
     id: 3,
-    title: 'Sistema de Cine',
+    titleKey: 'project.3.title',
     emoji: '🎬',
-    description: 'Sistema interactivo de atención al cliente para cine con reserva de entradas, selección de asientos, gestión de funciones y cartelera. Desarrollado con Java y Spring Boot.',
+    descKey: 'project.3.desc',
     tags: ['Java', 'Spring Boot', 'MySQL', 'REST API'],
     github: 'https://github.com/mateoscns/cine',
     demo: '',
@@ -38,6 +39,7 @@ const projects = [
 ]
 
 export default function Projects() {
+  const { t } = useLanguage()
 
   return (
     <section id="projects" className="py-20 lg:py-32 relative overflow-hidden">
@@ -58,13 +60,13 @@ export default function Projects() {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-400 text-sm font-medium mb-4"
             >
               <Code size={16} />
-              <span>Proyectos</span>
+              <span>{t('projects.badge')}</span>
             </motion.div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-              Mis <span className="bg-gradient-to-r from-primary-400 to-purple-400 bg-clip-text text-transparent">Proyectos</span>
+              {t('projects.title')} <span className="bg-gradient-to-r from-primary-400 to-purple-400 bg-clip-text text-transparent">{t('projects.titleHighlight')}</span>
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-              Una selección de proyectos que demuestran mis habilidades y experiencia
+              {t('projects.subtitle')}
             </p>
           </div>
         </AnimatedSection>
@@ -85,19 +87,19 @@ export default function Projects() {
                 {project.featured && (
                   <div className="flex items-center gap-1 px-2 py-1 rounded-full bg-yellow-500/20 border border-yellow-500/30 text-yellow-400 text-xs font-semibold">
                     <Star size={12} fill="currentColor" />
-                    <span>Destacado</span>
+                    <span>{t('projects.featured')}</span>
                   </div>
                 )}
               </div>
 
               {/* Project Title */}
               <h3 className="text-xl font-bold text-white mb-3 group-hover:text-primary-400 transition-colors">
-                {project.title}
+                {t(project.titleKey)}
               </h3>
               
               {/* Description */}
               <p className="text-gray-400 text-sm mb-4 line-clamp-3">
-                {project.description}
+                {t(project.descKey)}
               </p>
 
               {/* Tags */}
@@ -123,7 +125,7 @@ export default function Projects() {
                   className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-gray-800/50 border border-gray-700/50 text-gray-300 hover:text-primary-400 hover:border-primary-500/30 transition-all text-sm font-medium"
                 >
                   <Github size={18} />
-                  <span>Ver en GitHub</span>
+                  <span>{t('projects.viewGithub')}</span>
                 </motion.a>
               )}
             </motion.div>
@@ -141,7 +143,7 @@ export default function Projects() {
               className="inline-flex items-center gap-2 px-6 py-3 border border-gray-600 text-gray-300 font-semibold rounded-xl hover:border-primary-500 hover:text-primary-400 transition-all duration-300"
             >
               <Github size={20} />
-              <span>Ver más en GitHub</span>
+              <span>{t('projects.viewMore')}</span>
             </motion.a>
           </div>
         </AnimatedSection>

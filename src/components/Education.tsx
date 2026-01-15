@@ -3,45 +3,48 @@
 import { motion } from 'framer-motion'
 import { GraduationCap, BookOpen, Calendar } from 'lucide-react'
 import AnimatedSection from './AnimatedSection'
-
-const education = [
-  {
-    id: 1,
-    degree: 'Técnico Superior en Programación',
-    institution: 'Universidad Tecnológica Nacional (UTN Córdoba)',
-    location: 'Córdoba, Argentina',
-    period: '2022 - 2025',
-    description: 'Especializado en Backend (Java/Spring, .NET) y Arquitecturas Distribuidas. Experto en integrar lógica de negocio compleja con interfaces modernas y trabajar en ciclos completos de desarrollo (SDLC) bajo metodologías ágiles en equipos de gran escala (+30 devs).',
-    achievements: [
-      'Tesis: CompraXApp - Plataforma E-Commerce con MercadoPago',
-      'Desarrollo de ERP en equipo de 30 personas',
-      'Metodologías ágiles SCRUM',
-    ],
-    icon: GraduationCap,
-  },
-  {
-    id: 2,
-    degree: 'Curso de Inglés Avanzado',
-    institution: 'Universidad Nacional de Córdoba',
-    location: 'Córdoba, Argentina',
-    period: 'En proceso',
-    description: 'Formación en inglés avanzado para comunicación profesional y técnica.',
-    achievements: [],
-    icon: GraduationCap,
-  },
-  {
-    id: 3,
-    degree: 'Bachiller en Ciencias Naturales',
-    institution: 'Escuela Don Orione',
-    location: 'Córdoba, Argentina',
-    period: 'Finalizado 2021',
-    description: 'Formación secundaria con orientación en ciencias naturales.',
-    achievements: [],
-    icon: GraduationCap,
-  },
-]
+import { useLanguage } from '@/context/LanguageContext'
 
 export default function Education() {
+  const { t } = useLanguage()
+
+  const education = [
+    {
+      id: 1,
+      degreeKey: 'edu.1.degree',
+      institutionKey: 'edu.1.institution',
+      location: 'Córdoba, Argentina',
+      periodKey: 'edu.1.period',
+      descKey: 'edu.1.desc',
+      achievements: [
+        'edu.1.achievement1',
+        'edu.1.achievement2',
+        'edu.1.achievement3',
+      ],
+      icon: GraduationCap,
+    },
+    {
+      id: 2,
+      degreeKey: 'edu.2.degree',
+      institutionKey: 'edu.2.institution',
+      location: 'Córdoba, Argentina',
+      periodKey: 'edu.2.period',
+      descKey: 'edu.2.desc',
+      achievements: [],
+      icon: GraduationCap,
+    },
+    {
+      id: 3,
+      degreeKey: 'edu.3.degree',
+      institutionKey: 'edu.3.institution',
+      location: 'Córdoba, Argentina',
+      periodKey: 'edu.3.period',
+      descKey: 'edu.3.desc',
+      achievements: [],
+      icon: GraduationCap,
+    },
+  ]
+
   return (
     <section id="education" className="py-20 lg:py-32 relative overflow-hidden">
       {/* Background */}
@@ -61,13 +64,13 @@ export default function Education() {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-400 text-sm font-medium mb-4"
             >
               <GraduationCap size={16} />
-              <span>Educación</span>
+              <span>{t('education.badge')}</span>
             </motion.div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
-              <span className="bg-gradient-to-r from-primary-400 to-purple-400 bg-clip-text text-transparent">Formación</span> Académica
+              <span className="bg-gradient-to-r from-primary-400 to-purple-400 bg-clip-text text-transparent">{t('education.title')}</span> {t('education.titleHighlight')}
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-              Mi trayectoria educativa y formación profesional
+              {t('education.subtitle')}
             </p>
           </div>
         </AnimatedSection>
@@ -80,7 +83,7 @@ export default function Education() {
                 <BookOpen className="text-primary-400" size={24} />
               </div>
               <h3 className="text-2xl font-bold text-white">
-                Formación Académica
+                {t('education.section')}
               </h3>
             </div>
           </AnimatedSection>
@@ -102,36 +105,36 @@ export default function Education() {
                   <div className="ml-12">
                     <div className="flex flex-wrap items-center gap-3 mb-2">
                       <h4 className="text-xl font-bold text-white">
-                        {edu.degree}
+                        {t(edu.degreeKey)}
                       </h4>
                     </div>
                     
                     <p className="text-primary-400 font-semibold mb-1">
-                      {edu.institution}
+                      {t(edu.institutionKey)}
                     </p>
                     
                     <div className="flex items-center gap-4 text-sm text-gray-500 mb-4">
                       <span className="flex items-center gap-1">
                         <Calendar size={14} />
-                        {edu.period}
+                        {t(edu.periodKey)}
                       </span>
                       <span>{edu.location}</span>
                     </div>
 
                     <p className="text-gray-400 mb-4">
-                      {edu.description}
+                      {t(edu.descKey)}
                     </p>
 
                     {edu.achievements.length > 0 && (
                       <div className="space-y-2">
                         <p className="text-sm font-semibold text-gray-300">
-                          Logros destacados:
+                          {t('education.achievements')}
                         </p>
                         <ul className="space-y-1">
-                          {edu.achievements.map((achievement, i) => (
+                          {edu.achievements.map((achievementKey, i) => (
                             <li key={i} className="flex items-start gap-2 text-sm text-gray-400">
                               <span className="text-primary-400 mt-1">•</span>
-                              {achievement}
+                              {t(achievementKey)}
                             </li>
                           ))}
                         </ul>
@@ -147,8 +150,7 @@ export default function Education() {
           <AnimatedSection delay={0.6}>
             <div className="mt-8 p-4 rounded-xl bg-gradient-to-r from-primary-500/10 to-purple-500/10 border border-primary-500/20">
               <p className="text-sm text-gray-300">
-                💡 <span className="font-medium text-white">En constante aprendizaje:</span> Actualmente 
-                profundizando en arquitectura de microservicios y desarrollo cloud-native.
+                💡 <span className="font-medium text-white">{t('education.learning')}</span> {t('education.learningText')}
               </p>
             </div>
           </AnimatedSection>
