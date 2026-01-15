@@ -189,7 +189,7 @@ export default function Hero() {
             transition={{ duration: 2, repeat: Infinity }}
             className="flex flex-col items-center gap-2 text-gray-500 hover:text-primary-400 transition-colors"
           >
-            <span className="text-xs uppercase tracking-widest">Explorar</span>
+            <span className="text-xs uppercase tracking-widest">{t('hero.explore')}</span>
             <ArrowDown size={16} />
           </motion.a>
         </motion.div>

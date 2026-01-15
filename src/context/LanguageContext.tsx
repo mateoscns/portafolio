@@ -34,6 +34,7 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.terminal.location': 'Córdoba, Argentina',
     'hero.terminal.stack': 'Java 17 • Spring Boot 3 • Angular • .NET',
     'hero.terminal.status': 'Ready to build amazing things',
+    'hero.explore': 'Explore',
     
     // About
     'about.title': 'About',
@@ -266,6 +267,7 @@ const translations: Record<Language, Record<string, string>> = {
     'hero.terminal.location': 'Córdoba, Argentina',
     'hero.terminal.stack': 'Java 17 • Spring Boot 3 • Angular • .NET',
     'hero.terminal.status': 'Listo para crear cosas increíbles',
+    'hero.explore': 'Explorar',
     
     // About
     'about.title': 'Sobre',
