@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Folder, Github, Star } from 'lucide-react'
+import { Github, Star, Code } from 'lucide-react'
 import AnimatedSection from './AnimatedSection'
 
 const projects = [
@@ -57,7 +57,7 @@ export default function Projects() {
               viewport={{ once: true }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 text-primary-400 text-sm font-medium mb-4"
             >
-              <Folder size={16} />
+              <Code size={16} />
               <span>Proyectos</span>
             </motion.div>
             <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
