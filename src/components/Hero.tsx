@@ -106,7 +106,7 @@ export default function Hero() {
                 <div className="p-2 rounded-lg bg-primary-500/10 border border-primary-500/20">
                   <Terminal className="text-primary-400" size={20} />
                 </div>
-                <span className="text-xl md:text-2xl text-gray-300 font-light">
+                <span className="text-xl md:text-2xl text-gray-300 font-light whitespace-nowrap">
                   {t('hero.role')}
                 </span>
               </div>
@@ -126,9 +126,9 @@ export default function Hero() {
                   href="#projects"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="group relative px-8 py-4 bg-gradient-to-r from-primary-500 to-purple-500 text-white font-semibold rounded-xl overflow-hidden transition-all duration-300 shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40"
+                  className="group relative px-8 py-4 bg-gradient-to-r from-primary-500 to-purple-500 text-white font-semibold rounded-xl overflow-hidden transition-all duration-300 shadow-lg shadow-primary-500/25 hover:shadow-primary-500/40 min-w-[180px] text-center"
                 >
-                  <span className="relative z-10 flex items-center gap-2">
+                  <span className="relative z-10 flex items-center justify-center gap-2">
                     <Zap size={18} />
                     {t('hero.cta.projects')}
                   </span>
@@ -138,7 +138,7 @@ export default function Hero() {
                   href="#contact"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 border border-gray-600 text-gray-300 font-semibold rounded-xl hover:border-primary-500 hover:text-primary-400 transition-all duration-300"
+                  className="px-8 py-4 border border-gray-600 text-gray-300 font-semibold rounded-xl hover:border-primary-500 hover:text-primary-400 transition-all duration-300 min-w-[180px] text-center"
                 >
                   {t('hero.cta.contact')}
                 </motion.a>
